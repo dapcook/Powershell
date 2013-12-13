@@ -1,3 +1,24 @@
+# this is the t-sql table that needs to be created.
+#CREATE TABLE [dbo].[WebsiteLog](
+#	[LogFilename] [varchar](255) NOT NULL,
+#	[RowNumber] [int] NOT NULL,
+#	[EntryTime] [datetime] NOT NULL,
+#	[ServerIpAddress] [varchar](255) NOT NULL,
+#	[Method] [varchar](255) NOT NULL,
+#	[UriStem] [varchar](255) NOT NULL,
+#	[UriQuery] [varchar](255) NULL,
+#	[Port] [int] NOT NULL,
+#	[Username] [varchar](255) NULL,
+#	[ClientIpAddress] [varchar](255) NOT NULL,
+#	[UserAgent] [varchar](255) NOT NULL,
+#	[Referrer] [varchar](255) NULL,
+#	[HttpStatus] [int] NOT NULL,
+#	[HttpSubstatus] [int] NOT NULL,
+#	[Win32Status] [int] NOT NULL,
+#	[TimeTaken] [int] NOT NULL
+#) ON [PRIMARY]
+
+
 $ErrorActionPreference = "Stop"
 
 Import-Module Pscx -EA 0
