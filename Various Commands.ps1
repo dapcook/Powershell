@@ -9,3 +9,6 @@ Get-ChildItem -Recurse | Select-String -pattern "What do I search for"
 
 # Format lenght field on ls command
 ls | Select-Object name, @{Name="Length"; Expression={ "{0:N0}" -f ($_.Length) }
+
+# Rename files and append text 
+Get-ChildItem | Rename-Item -NewName {"text in file name" + $_.Name}
