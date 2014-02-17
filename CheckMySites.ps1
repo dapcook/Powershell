@@ -1,5 +1,5 @@
-$smtpServer = "mail.kumed.com"
-$servers = "www.kumed.com", "www.kucancercenter.org", "dcook2-web"
+$smtpServer = "*******"
+$servers = "*******", "*******", "*******"
 $collection = $()
 $SendEmail = $false
 
@@ -8,9 +8,9 @@ $tcp = New-Object Net.Sockets.TcpClient
 $msg = New-Object Net.Mail.MailMessage
 $smtp = New-Object Net.Mail.SmtpClient($smtpServer)
 
-$msg.From = "noreply@kumc.edu"
-$msg.ReplyTo = "noreply@kumc.edu"
-$msg.To.Add("dcook2@kumc.edu")
+$msg.From = "*******"
+$msg.ReplyTo = "*******"
+$msg.To.Add("*******")
 $msg.Subject = "CheckMySites Notification"
 
 foreach($server in $servers)
