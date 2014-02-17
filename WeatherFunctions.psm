@@ -1,0 +1,5 @@
+function Get-Weather{
+   param ([String]$ZipCode)
+   $b = New-WebServiceProxy -Uri http://wsf.cdyne.com/WeatherWS/Weather.asmx?wsdl
+   $b.GetCityWeatherByZIP($ZipCode)
+}
