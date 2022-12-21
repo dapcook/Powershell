@@ -1,12 +1,9 @@
-﻿#David Cook
-$sqlServer = "SQL12LISTENER3"
-$password = "S!t3c0r3db"
-$data = @(("Sitecore_Core_upg","sitecoredb"),
-          ("Sitecore_Master_upg","sitecoredb"),
-          ("Sitecore_Weblive_upg","sitecoredb"),
-          ("Sitecore_Web_upg","sitecoredb"),
-          ("Sitecore_Webintranet_upg","sitecoredb")
-         )
+# Written By David Cook
+# 12-21-2022
+
+$sqlServer = "localhost"
+$password = "Aimee0725!!"
+$data = @(("ChuckTVShow","sa"),("ENDOFLINE","ENDOFLINE"))
 
 function Test-SQLDatabase{
     param(
@@ -39,6 +36,7 @@ function Test-SQLDatabase{
             Database = $Database
             User = $authentication
         }
+        Write-Host "Successfull Connection" -ForegroundColor Green
     }
     catch{
         $Result = @{
@@ -49,6 +47,7 @@ function Test-SQLDatabase{
             User = $authentication
         }
         Write-Host $_.Exception.GetType().Fullname, $_.Exception.Message -ForegroundColor Green
+        
     }
     Finally{
         # Close the database connection
@@ -60,9 +59,12 @@ function Test-SQLDatabase{
 }
 
 foreach($item in $data){
-    $d = $item[0]
-    $p = $item[1]
-
-    Test-SQLDatabase -Server $sqlServer -Database $d -UserName $p -Password $password
+    if(! ($item[0] -eq "ENDOFLINE"))
+    {
+        $d = $item[0]
+        $p = $item[1]
+    
+        Test-SQLDatabase -Server $sqlServer -Database $d -UserName $p -Password $password
+    }
 }
 

@@ -1,6 +1,7 @@
-﻿$PageToTest = "https://www.kansashealthsystem.com/patient-visitor/policies-procedures/hospital-visitor-guidelines2"
-$RequestResults = Invoke-WebRequest $PageToTest -MaximumRedirection 0
+﻿$SMTPSvr = ‘smtp.kumed.com'
+$from = ‘noreply@kumc.edu’
+$to = ‘dcook2@kumc.edu’
+#testing connection to server:
+Test-NetConnection $SMTPSvr -port 25
 
-#$request = [System.Net.WebRequest]::Create($PageToTest)
-#$request.AllowAutoRedirect = $false
-#$request.GetResponse()
+Send-MailMessage –From $from –To $to –Subject “Test Email” –Body “Test E-mail (body)” -SmtpServer $SMTPSvr
