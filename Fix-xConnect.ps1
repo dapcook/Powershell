@@ -1,0 +1,1 @@
+﻿Get-ChildItem Cert:\LocalMachine\root -Recurse | Where-Object {$_.Issuer -ne $_.Subject} | Move-Item -Destination Cert:\LocalMachine\CA
