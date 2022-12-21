@@ -1,0 +1,1 @@
+Set-Location -Path "C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL"

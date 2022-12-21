@@ -1,0 +1,1 @@
+Set-Location -Path "\\ukh-wwscfront2\wwscfront2\Apps\KHS\KHS-Web"

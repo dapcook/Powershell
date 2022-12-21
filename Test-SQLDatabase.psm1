@@ -1,14 +1,4 @@
-﻿#David Cook
-$sqlServer = "SQL12LISTENER3"
-$password = "S!t3c0r3db"
-$data = @(("Sitecore_Core_upg","sitecoredb"),
-          ("Sitecore_Master_upg","sitecoredb"),
-          ("Sitecore_Weblive_upg","sitecoredb"),
-          ("Sitecore_Web_upg","sitecoredb"),
-          ("Sitecore_Webintranet_upg","sitecoredb")
-         )
-
-function Test-SQLDatabase{
+﻿function Test-SQLDatabase{
     param(
         [Parameter(Position=0, Mandatory=$True, ValueFromPipeline=$True)] [string] $Server,
         [Parameter(Position=1, Mandatory=$True)] [string] $Database,
@@ -17,16 +7,18 @@ function Test-SQLDatabase{
         [Parameter(Position=2, Mandatory=$True, ParameterSetName="WindowsAuth")] [switch] $UseWindowsAuthentication
     )
 
-   
+    # Connect to the database, then immediately close the connection. If an exception occurs, it indicates the connection
+    # was not successfull
+    Write-Host "Setting up Database Connection"
+
+
     $dbConnection = New-Object System.Data.SqlClient.SqlConnection
     if (!$UseWindowsAuthentication){
         $dbConnection.ConnectionString = "Data Source=$Server; uid=$UserName; pwd=$Password; Database=$Database;Integrated Security=False"
-        Write-Host $dbConnection.ConnectionString
         $authentication = "SQL ($Username)"
     }
     else{
         $dbConnection.ConnectionString = "Data Source=$Server; Database=$Database;Integrated Security=True;"
-        Write-Host $dbConnection.ConnectionString
         $authentication = "Windows ($env:USERNAME)"
     }
 
@@ -48,21 +40,14 @@ function Test-SQLDatabase{
             Database = $Database
             User = $authentication
         }
-        Write-Host $_.Exception.GetType().Fullname, $_.Exception.Message -ForegroundColor Green
+        Write-Host $_.Exception.GetType().Fullname, $_.Exception.Message
     }
     Finally{
         # Close the database connection
         $dbConnection.Close()
         # Return the results as an object
         $outputObject = New-Object -Property $Result -TypeName psobject
-        #Write-Output $outputObject
+        Write-Output $outputObject
     }
 }
-
-foreach($item in $data){
-    $d = $item[0]
-    $p = $item[1]
-
-    Test-SQLDatabase -Server $sqlServer -Database $d -UserName $p -Password $password
-}
-
+Export-ModuleMember -Function Test-SQLDatabase
