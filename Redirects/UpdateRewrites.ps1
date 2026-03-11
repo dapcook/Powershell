@@ -1,4 +1,28 @@
-﻿## 1) Set up variables for directory locations
+﻿<#
+.SYNOPSIS
+    Archives the current RewriteMaps.config and deploys an updated version to Sitecore.
+
+.DESCRIPTION
+    Performs a four-step rewrite map update process:
+    1. Archives the current RewriteMaps.config from the Sitecore config directory to an
+       archive folder, using a date-stamped filename with an incrementing counter suffix.
+    2. Copies the new RewriteMaps.config from a staging temp directory to the Sitecore
+       config directory.
+    3. Touches the web.config file (updates its LastWriteTime) to force IIS to reload
+       and pick up the new rewrite rules.
+    4. Clears all local variables.
+
+.NOTES
+    Author: David Cook
+    - Update $archiveLoc, $newFile, $currentLoc, $rewriteFile, and $webConfig to match
+      your Sitecore environment paths.
+    - Run this script after placing an updated RewriteMaps.config in the $newFile directory.
+
+.EXAMPLE
+    .\UpdateRewrites.ps1
+    Archives the existing rewrite config, deploys the new one, and refreshes IIS.
+#>
+## 1) Set up variables for directory locations
 $archiveLoc = "C:\temp\Rewrite Maps\KHS\Archived"    # Archived Directory
 $newFile = "C:\temp\Rewrite Maps\KHS\Current"        # Location of new RewriteMaps.config file
 $currentLoc = "C:\inetpub\wwwroot\xp0.sc\config"     # Location that new file gets copied too

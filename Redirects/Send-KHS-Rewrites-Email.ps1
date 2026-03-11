@@ -1,4 +1,24 @@
-﻿$ccUsers = "dcook2@kumc.edu", "jcarpenter2@kumc.edu", "mfrancis3@kumc.edu, bmedlin@kumc.edu", "ccasteel2@kumc.edu", "eray2@kumc.edu", "lleesmann@kumc.edu", "cpoindexter@kumc.edu"
+﻿<#
+.SYNOPSIS
+    Sends a notification email to the HITS Service Desk about updated KHS rewrite maps.
+
+.DESCRIPTION
+    Sends an HTML-formatted email to the HITS Service Desk with CC to the web team,
+    informing them that the KansasHealthSystem rewrite map has been updated and providing
+    instructions for copying the config file to the production IIS servers and refreshing
+    the web.config to reload IIS.
+
+.NOTES
+    Author: David Cook
+    - Update $ccUsers, $HITSEmail, and the SMTP server if your team's addresses change.
+    - The email instructs HITS to copy RewriteMaps.config and touch web.config on the
+      production IIS servers.
+
+.EXAMPLE
+    .\Send-KHS-Rewrites-Email.ps1
+    Sends the rewrite update notification email to the HITS Service Desk.
+#>
+$ccUsers = "dcook2@kumc.edu", "jcarpenter2@kumc.edu", "mfrancis3@kumc.edu, bmedlin@kumc.edu", "ccasteel2@kumc.edu", "eray2@kumc.edu", "lleesmann@kumc.edu", "cpoindexter@kumc.edu"
 
 $HITSEmail = "HITS_ServiceDesk@kumc.edu"
 

@@ -3,7 +3,30 @@
 # Disk space monitoring and reporting script
 #
 #########################################################
- 
+<#
+.SYNOPSIS
+    Monitors disk space on a list of servers and sends an HTML email report if data is found.
+
+.DESCRIPTION
+    Reads a list of server names from a file passed as a command-line argument, queries disk
+    space information via WMI (Win32_LogicalDisk), formats the results as an HTML table, and
+    sends an email report if any rows are present. A threshold variable is defined (default 5%)
+    but the where-clause filter is commented out, so all fixed disks are reported regardless of
+    free space.
+
+.PARAMETER args[0]
+    Path to a text file containing one server name per line to check disk space on.
+
+.NOTES
+    Author: David Cook
+    - Pass the path to your server list file as the first script argument.
+    - Update $users, $fromemail, and $server (SMTP) to match your environment.
+    - Uncomment the Where-Object threshold filter to only report disks below $thresholdspace%.
+
+.EXAMPLE
+    .\diskspace.ps1 servers.txt
+    Checks all servers in servers.txt and emails a disk space report to the configured address.
+#>
 $users = "dcook2@kumc.edu" # List of users to email your report to (separate by comma)
 $fromemail = "noreply@kumc.edu"
 $server = "smtp.kumc.edu" #enter your own SMTP server DNS name / IP address here

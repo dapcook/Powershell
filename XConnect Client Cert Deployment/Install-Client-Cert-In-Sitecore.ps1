@@ -1,4 +1,29 @@
-﻿# By David Cook
+﻿<#
+.SYNOPSIS
+    Installs an xConnect client certificate into Sitecore and updates ConnectionStrings.config.
+
+.DESCRIPTION
+    Reads a PFX certificate file, imports it into both the LocalMachine\My and LocalMachine\Root
+    certificate stores, extracts the thumbprint, and updates the xConnect-related connection string
+    entries in Sitecore's ConnectionStrings.config file with the new thumbprint value. Intended to
+    be executed on both Content Management and Content Delivery servers.
+
+.NOTES
+    Author: David Cook
+    Date:   09/12/2019
+    Role:   Web Developer 2 - Marketing Department
+    - Must be run as Administrator to install certificates and modify Sitecore config files.
+    - Update $certFileName and $sitecoreConfigLocation to match your environment.
+    - The password "P@ssw0rd!" is hard-coded; change it to a secure value before use.
+    - Connection strings updated: xconnect.collection.certificate,
+      xdb.referencedata.client.certificate, xdb.marketingautomation.reporting.client.certificate,
+      xdb.marketingautomation.operations.client.certificate.
+
+.EXAMPLE
+    .\Install-Client-Cert-In-Sitecore.ps1
+    Imports the PFX cert and updates all xConnect connection strings with the new thumbprint.
+#>
+# By David Cook
 # 09/12/2019
 # Web Developer 2 - Marketing Department
 # Installs the Client Certs for xconnect connectivity

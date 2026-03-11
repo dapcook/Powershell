@@ -1,6 +1,44 @@
 # Written By David Cook
 # 12-21-2022
+<#
+.SYNOPSIS
+    Tests SQL Server database connectivity using provided credentials.
 
+.DESCRIPTION
+    Defines a Test-SQLDatabase function that attempts to open a SqlClient connection
+    to a specified SQL Server instance and database, using either SQL authentication
+    or Windows authentication. Measures the connection time and outputs the result.
+    Iterates over a predefined list of database/username pairs and tests each one.
+
+.PARAMETER Server
+    The SQL Server instance name or address.
+
+.PARAMETER Database
+    The name of the database to connect to.
+
+.PARAMETER UserName
+    SQL login username (used with SQLAuth parameter set).
+
+.PARAMETER Password
+    SQL login password (used with SQLAuth parameter set).
+
+.PARAMETER UseWindowsAuthentication
+    Switch. When specified, uses Windows (integrated) authentication instead of SQL auth.
+
+.NOTES
+    Author: David Cook
+    Date:   12-21-2022
+    - Update $sqlServer, $password, and $data to match your target databases.
+    - Warning: $password is stored in plain text. Consider using secure credential handling.
+
+.EXAMPLE
+    .\Test-SQLDatabase-new.ps1
+    Tests connectivity to all databases in the $data array against $sqlServer.
+
+.EXAMPLE
+    Test-SQLDatabase -Server "localhost" -Database "MyDB" -UserName "sa" -Password "P@ss"
+    Tests a single database connection using SQL authentication.
+#>
 $sqlServer = "localhost"
 $password = "Aimee0725!!"
 $data = @(("ChuckTVShow","sa"),("ENDOFLINE","ENDOFLINE"))

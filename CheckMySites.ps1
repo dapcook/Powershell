@@ -1,3 +1,23 @@
+<#
+.SYNOPSIS
+    Checks connectivity to a list of servers and sends a notification email if any are down.
+
+.DESCRIPTION
+    Iterates over a predefined list of server names, pinging each one and attempting a TCP
+    connection on port 80. For servers that respond, it downloads the HTTP content and records
+    the content length. If any server is unreachable or port 80 is not accessible, a notification
+    email is sent via SMTP. If all servers are up, results are exported to a CSV file.
+
+.NOTES
+    Author: David Cook
+    - Update $smtpServer, $servers, $msg.From, $msg.ReplyTo, and $msg.To.Add() with real values
+      before running.
+    - Requires network access to the target servers and to the SMTP server.
+
+.EXAMPLE
+    .\CheckMySites.ps1
+    Checks all servers in $servers and either sends an alert email or writes ServerStatus.csv.
+#>
 $smtpServer = "*******"
 $servers = "*******", "*******", "*******"
 $collection = $()
