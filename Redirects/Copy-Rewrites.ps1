@@ -1,4 +1,24 @@
-﻿function Write-FileInfo{
+﻿<#
+.SYNOPSIS
+    Copies the KHS RewriteMaps.config file to the ww and su front-end web servers.
+
+.DESCRIPTION
+    Defines helper functions Write-FileInfo and Write-Line for displaying file metadata.
+    Shows the current state of the local and remote RewriteMaps.config files, copies
+    the local file to both front-end server temp directories, then shows the updated
+    state after the copy. Commented-out sections for the Cancer rewrite map are included
+    for reference.
+
+.NOTES
+    Author: David Cook
+    - Update $localkhsPath, $wwRemKhspath, and $suRemKhspath to match your environment.
+    - Requires network access and write permissions to the remote front-end server shares.
+
+.EXAMPLE
+    .\Copy-Rewrites.ps1
+    Displays before/after file info and copies the KHS RewriteMaps.config to both front-end servers.
+#>
+function Write-FileInfo{
     param(
         [string]$FileName,
         [string]$Prefix

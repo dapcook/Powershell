@@ -1,4 +1,23 @@
-﻿$processDirectories = @("C:\temp\uatauthoring-logs", "C:\temp\authoring-logs")
+﻿<#
+.SYNOPSIS
+    Organizes Sitecore log files in multiple temp directories into date-named subfolders.
+
+.DESCRIPTION
+    Iterates over a list of directories (UAT authoring logs and authoring logs), and for
+    each directory, moves every non-folder file into a subfolder whose name is derived
+    from characters 4–11 of the filename (the date portion of Sitecore log filenames).
+    Creates the subfolder if it does not already exist.
+
+.NOTES
+    Author: David Cook
+    - Update $processDirectories to include the paths relevant to your environment.
+    - Assumes Sitecore log filenames follow the convention: log.YYYYMMDD.*.txt
+
+.EXAMPLE
+    .\ParseSitecoreLogsinTempDirectory.ps1
+    Moves all log files in the configured directories into YYYYMMDD-named subfolders.
+#>
+$processDirectories = @("C:\temp\uatauthoring-logs", "C:\temp\authoring-logs")
 
 foreach($pathToParse in $processDirectories){
    

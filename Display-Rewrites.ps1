@@ -1,4 +1,23 @@
-﻿function Write-FileInfo{
+﻿<#
+.SYNOPSIS
+    Displays file information for the Cancer and KHS rewrite map and rule configuration files.
+
+.DESCRIPTION
+    Defines helper functions Write-FileInfo and Write-Line, then uses them to display the
+    name, size, and last-modified timestamp of the RewriteMaps.config and RewriteRules.config
+    files for both the Cancer and KHS Sitecore sites. Checks both the local IIS path and two
+    remote front-end server shares (ww and su).
+
+.NOTES
+    Author: David Cook
+    - Paths are hard-coded to specific server shares. Update them to match your environment.
+    - Requires read access to \\ukh-wwscfront2 and \\ukh-suscfront2 shares.
+
+.EXAMPLE
+    .\Display-Rewrites.ps1
+    Outputs a color-coded list showing each rewrite config file's size and last-write time.
+#>
+function Write-FileInfo{
     param(
         [string]$FileName,
         [string]$Prefix

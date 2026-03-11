@@ -1,4 +1,38 @@
-﻿#David Cook
+﻿<#
+.SYNOPSIS
+    Tests SQL Server database connectivity for a list of Sitecore databases.
+
+.DESCRIPTION
+    Defines a Test-SQLDatabase function that attempts to open a SqlClient connection to
+    a SQL Server instance using either SQL authentication or Windows authentication.
+    Iterates over a predefined list of Sitecore database names and usernames, testing
+    connectivity to each one against the configured SQL Server listener.
+
+.PARAMETER Server
+    The SQL Server instance name or address.
+
+.PARAMETER Database
+    The name of the database to connect to.
+
+.PARAMETER UserName
+    SQL login username (used with SQLAuth parameter set).
+
+.PARAMETER Password
+    SQL login password (used with SQLAuth parameter set).
+
+.PARAMETER UseWindowsAuthentication
+    Switch. When specified, uses Windows (integrated) authentication instead of SQL auth.
+
+.NOTES
+    Author: David Cook
+    - Update $sqlServer, $password, and $data to match your Sitecore database environment.
+    - Warning: Credentials are stored in plain text. Consider using secure credential handling.
+
+.EXAMPLE
+    .\Test-SQLDatabase.ps1
+    Tests connectivity to all Sitecore databases in the $data array.
+#>
+#David Cook
 $sqlServer = "SQL12LISTENER3"
 $password = "S!t3c0r3db"
 $data = @(("Sitecore_Core_upg","sitecoredb"),

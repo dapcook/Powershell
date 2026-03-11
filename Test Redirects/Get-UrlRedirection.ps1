@@ -1,3 +1,31 @@
+<#
+.SYNOPSIS
+    Defines and calls Get-UrlRedirections to enumerate HTTP redirections for a URL.
+
+.DESCRIPTION
+    Contains the Get-UrlRedirections function (same implementation as Get-UrlRedirections.ps1)
+    and calls it against a sample URL. The function follows HTTP redirections for a given URL,
+    returning either the final destination URL or the full redirection chain when -Enumerate
+    is specified.
+
+.PARAMETER Url
+    The URL to inspect for HTTP redirections. Accepts pipeline input.
+
+.PARAMETER Enumerate
+    Switch. When specified, returns the complete chain of redirect URLs as an array.
+
+.PARAMETER MaxRedirections
+    Maximum number of redirections to follow. Defaults to 50.
+
+.NOTES
+    Author: David Cook
+    - Update $Uri to test a different URL.
+    - Requires network access to the target URL.
+
+.EXAMPLE
+    .\Get-UrlRedirection.ps1
+    Resolves the final destination of the configured $Uri and prints it.
+#>
 ﻿#<add 
 # key                                    ="/patient-visitor/visitor-information/neighborhood-amenities" 
 # value="https://www.kansashealthsystem.com/patient-visitor/hospital-amenities/neighborhood-guide" />

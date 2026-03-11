@@ -1,4 +1,44 @@
-﻿function Test-SQLDatabase{
+﻿<#
+.SYNOPSIS
+    PowerShell module that exports a Test-SQLDatabase function for testing SQL Server connectivity.
+
+.DESCRIPTION
+    Provides the Test-SQLDatabase function which attempts to open a SqlClient connection to a
+    specified SQL Server instance and database. Supports both SQL authentication and Windows
+    (integrated) authentication. Measures the time taken to connect and returns a result object
+    indicating success or failure, elapsed time, server name, database name, and authentication type.
+
+.PARAMETER Server
+    The SQL Server instance name or address.
+
+.PARAMETER Database
+    The name of the database to connect to.
+
+.PARAMETER UserName
+    SQL login username (used with the SQLAuth parameter set).
+
+.PARAMETER Password
+    SQL login password (used with the SQLAuth parameter set).
+
+.PARAMETER UseWindowsAuthentication
+    Switch. When specified, uses Windows (integrated) authentication instead of SQL auth.
+
+.NOTES
+    Author: David Cook
+    Import this module with: Import-Module .\Test-SQLDatabase.psm1
+    Then call: Test-SQLDatabase -Server "MyServer" -Database "MyDB" -UserName "user" -Password "pass"
+
+.EXAMPLE
+    Import-Module .\Test-SQLDatabase.psm1
+    Test-SQLDatabase -Server "localhost" -Database "MyDB" -UserName "sa" -Password "P@ss"
+    Tests a SQL Server connection using SQL authentication and returns a result object.
+
+.EXAMPLE
+    Import-Module .\Test-SQLDatabase.psm1
+    Test-SQLDatabase -Server "localhost" -Database "MyDB" -UseWindowsAuthentication
+    Tests a SQL Server connection using the current Windows user's credentials.
+#>
+function Test-SQLDatabase{
     param(
         [Parameter(Position=0, Mandatory=$True, ValueFromPipeline=$True)] [string] $Server,
         [Parameter(Position=1, Mandatory=$True)] [string] $Database,

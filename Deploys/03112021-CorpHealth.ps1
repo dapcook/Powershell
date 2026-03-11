@@ -1,4 +1,25 @@
-﻿$DeployDirectory = "D:\Sitecore Deploy"
+﻿<#
+.SYNOPSIS
+    Deploys the Corporate Health Form feature files to staging and production environments.
+
+.DESCRIPTION
+    Copies compiled DLL/PDB files, Razor views, CSS, and JavaScript assets for the
+    TUKHS.Feature.PageContent and TUKHS project (CorporateHealthForm) to three destinations:
+    a local deploy folder (for record-keeping), the Content Management production directory,
+    and the Content Delivery production directory.
+
+.NOTES
+    Author: David Cook
+    Date:   03/11/2021
+    - Update $DeployDirectory, $CMProdDeploy, $CDProdDeploy, $PageContentDirectory, and
+      $WebsiteDirectory to match your environment before running.
+    - Destination folders must already exist; Copy-Item will fail if they do not.
+
+.EXAMPLE
+    .\03112021-CorpHealth.ps1
+    Deploys the Corp Health Form feature to staging and both production Sitecore instances.
+#>
+$DeployDirectory = "D:\Sitecore Deploy"
 $DeployName = "$DeployDirectory\03112021 - Corp Health Form"
 $CMProdDeploy = "D:\Sitecore Production\Content Management\Current"
 $CDProdDeploy = "D:\Sitecore Production\Content Delivery\Current"

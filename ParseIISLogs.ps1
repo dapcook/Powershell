@@ -1,24 +1,29 @@
 # this is the t-sql table that needs to be created.
-#CREATE TABLE [dbo].[WebsiteLog](
-#	[LogFilename] [varchar](255) NOT NULL,
-#	[RowNumber] [int] NOT NULL,
-#	[EntryTime] [datetime] NOT NULL,
-#	[ServerIpAddress] [varchar](255) NOT NULL,
-#	[Method] [varchar](255) NOT NULL,
-#	[UriStem] [varchar](255) NOT NULL,
-#	[UriQuery] [varchar](255) NULL,
-#	[Port] [int] NOT NULL,
-#	[Username] [varchar](255) NULL,
-#	[ClientIpAddress] [varchar](255) NOT NULL,
-#	[UserAgent] [varchar](255) NOT NULL,
-#	[Referrer] [varchar](255) NULL,
-#	[HttpStatus] [int] NOT NULL,
-#	[HttpSubstatus] [int] NOT NULL,
-#	[Win32Status] [int] NOT NULL,
-#	[TimeTaken] [int] NOT NULL
-#) ON [PRIMARY]
+<#
+.SYNOPSIS
+    Parses IIS W3C log files and imports them into a SQL Server database.
 
+.DESCRIPTION
+    Provides three functions:
+    - ArchiveLogFiles: Zips all IIS log files in the specified directory to a dated archive.
+    - ImportLogFiles:  Uses Log Parser 2.2 to import IIS W3C log files into the WebsiteLog
+                       SQL Server table via an ODBC/SQL connection string.
+    - RemoveLogFiles:  Deletes all .log files from the specified directory.
+    
+    The Main function runs all three steps in sequence against the default IIS log path.
 
+.NOTES
+    Author: David Cook
+    - Requires the PSCX module (used for Write-Zip) and Log Parser 2.2 installed at the
+      default Program Files (x86) location.
+    - Update $connectionString in ImportLogFiles to point to your SQL Server instance.
+    - The SQL table schema is included as a comment at the top of this script.
+
+.EXAMPLE
+    .\ParseIISLogs.ps1
+    Imports IIS log files from C:\inetpub\logs\LogFiles\w3svc1 into SQL, archives them,
+    and removes the originals.
+#>
 $ErrorActionPreference = "Stop"
 
 Import-Module Pscx -EA 0

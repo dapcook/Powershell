@@ -1,4 +1,23 @@
-﻿function Write-FileInfo{
+﻿<#
+.SYNOPSIS
+    Displays current timestamps and sizes for KHS rewrite config files across all environments.
+
+.DESCRIPTION
+    Defines helper functions Write-FileInfo and Write-Line, then displays the name, size,
+    and last-modified time of the RewriteMaps.config file for the local Sitecore instance,
+    the ww and su staging temp locations, and the ww and su production config directories.
+    Useful for confirming which version of the rewrite config is deployed to each environment.
+
+.NOTES
+    Author: David Cook
+    - Update the path variables to match your environment.
+    - Requires read access to all listed network paths.
+
+.EXAMPLE
+    .\Get-CurrentRewriteTimeStamps.ps1
+    Outputs file info for all KHS rewrite config locations (local, ww, su, and production).
+#>
+function Write-FileInfo{
     param(
         [string]$FileName,
         [string]$Prefix

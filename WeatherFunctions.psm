@@ -1,3 +1,27 @@
+<#
+.SYNOPSIS
+    Provides a Get-Weather function that retrieves weather data by ZIP code.
+
+.DESCRIPTION
+    Defines a Get-Weather function that queries the CDYNE WeatherWS SOAP web service
+    using New-WebServiceProxy and returns current weather information for the given US
+    ZIP code.
+
+.PARAMETER ZipCode
+    The US ZIP code for which to retrieve weather information.
+
+.NOTES
+    Author: David Cook
+    - The CDYNE Weather web service (wsf.cdyne.com) may not be active or publicly
+      available. Verify the endpoint before use.
+    - New-WebServiceProxy requires Windows PowerShell (not PowerShell Core).
+
+.EXAMPLE
+    Import the module and call Get-Weather:
+    . .\WeatherFunctions.psm
+    Get-Weather -ZipCode "66101"
+    Returns current weather data for ZIP code 66101 (Kansas City, KS).
+#>
 function Get-Weather{
    param ([String]$ZipCode)
    $b = New-WebServiceProxy -Uri http://wsf.cdyne.com/WeatherWS/Weather.asmx?wsdl

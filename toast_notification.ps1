@@ -1,4 +1,24 @@
-﻿[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null
+﻿<#
+.SYNOPSIS
+    Displays a Windows toast notification using the Windows Runtime API.
+
+.DESCRIPTION
+    Uses Windows.UI.Notifications to create and display a ToastText02 notification with
+    a title and a message including the current time. The notification appears in the
+    Windows Action Center and as a popup.
+
+.NOTES
+    Author: David Cook
+    - Requires Windows 10 or later and Windows PowerShell (not PowerShell Core on Linux/macOS).
+    - The SuppressPopup and Activated event registration options are included as comments
+      but do not work with standard PowerShell.
+    - Update the text nodes to customize the notification title and body.
+
+.EXAMPLE
+    .\toast_notification.ps1
+    Displays a toast notification with "Script test" as the title and the current time.
+#>
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] > $null
 $template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent([Windows.UI.Notifications.ToastTemplateType]::ToastText02)
 
 $toastXml = [xml] $template.GetXml()
